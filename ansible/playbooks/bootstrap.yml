@@ -3,28 +3,5 @@
   hosts: all
   become: true
 
-  tasks:
-    - name: Ensure hostname is correct
-      hostname:
-        name: "{{ inventory_hostname }}"
-
-    - name: Disable swap (required for Kubernetes)
-      command: swapoff -a
-      when: ansible_swaptotal_mb > 0
-
-    - name: Comment swap in /etc/fstab
-      replace:
-        path: /etc/fstab
-        regexp: '^(.*swap.*)$'
-        replace: '#\1'
-
-    - name: Set vm.max_map_count (for containers)
-      sysctl:
-        name: vm.max_map_count
-        value: "262144"
-        state: present
-        reload: yes
-
-    - name: Update apt cache
-      apt:
-        update_cache: yes
+  roles:
+    - docker
