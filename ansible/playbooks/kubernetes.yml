@@ -1,0 +1,8 @@
+---
+- name: NebulaOps | Kubernetes Prerequisites & Install
+  hosts: all
+  become: true
+
+  roles:
+    - k8s_prereq
+    - k8s_install
