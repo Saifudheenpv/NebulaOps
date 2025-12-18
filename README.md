@@ -701,9 +701,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **DevOps Engineer | Cloud Enthusiast | Platform Engineering**
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Saifudheenpv)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/saifudheenpv07)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:mesaifudheenpv@gmail.com)
 
 **Specializations:**
 - ☁️ Cloud Platforms: AWS | Azure | GCP
@@ -769,7 +769,7 @@ If you find NebulaOps helpful, please consider:
 
 ### Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/nebulaops&type=Date)](https://star-history.com/#yourusername/nebulaops&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Saifudheenpv/nebulaops&type=Date)](https://star-history.com/#Saifudheenpv/nebulaops&Date)
 
 ---
 
