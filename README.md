@@ -175,14 +175,77 @@ These screenshots provide verifiable proof of end-to-end platform operation.
 
 ## 📊 Architecture Diagram
 
-![NebulaOps Architecture](architecture/architecture.png)
+```mermaid
+graph LR
+    %% Styling
+    classDef developerStyle fill:#6c757d,stroke:#495057,stroke-width:3px,color:#fff
+    classDef githubStyle fill:#24292e,stroke:#000,stroke-width:3px,color:#fff
+    classDef argocdStyle fill:#ff6b35,stroke:#e85d2c,stroke-width:3px,color:#fff
+    classDef k8sStyle fill:#326ce5,stroke:#2559c7,stroke-width:3px,color:#fff
+    classDef nginxStyle fill:#009639,stroke:#007a2f,stroke-width:3px,color:#fff
+    classDef prometheusStyle fill:#e6522c,stroke:#cc4a28,stroke-width:3px,color:#fff
+    classDef grafanaStyle fill:#f46800,stroke:#d55e00,stroke-width:3px,color:#fff
+    classDef browserStyle fill:#4285f4,stroke:#3367d6,stroke-width:3px,color:#fff
+    classDef serverStyle fill:#8e44ad,stroke:#6c3483,stroke-width:3px,color:#fff
+    
+    %% Main Flow
+    DEV["👨‍💻 Developer<br/>(Git Commit)"]:::developerStyle
+    GH["📦 GitHub<br/>nebulaops-gitops<br/><i>Single Source of Truth</i>"]:::githubStyle
+    ARGO["🔄 ArgoCD<br/><i>GitOps Engine</i><br/>Auto Sync | Desired State"]:::argocdStyle
+    
+    %% Kubernetes Cluster
+    subgraph K8S["☸️ Kubernetes Cluster (kubeadm)"]
+        direction TB
+        
+        subgraph CP["🖥️ Control Plane - servera"]
+            CP1["• API Server<br/>• Scheduler<br/>• Controller Manager<br/>• etcd"]:::serverStyle
+        end
+        
+        subgraph WN["🖥️ Worker Node - serverb"]
+            WN1["• Application Pods<br/>• kubelet<br/>• kube-proxy"]:::serverStyle
+        end
+        
+        APP["📦 NGINX Application<br/><i>Deployment + Pods</i>"]:::nginxStyle
+        ING["🔀 NGINX Ingress Controller<br/><i>HTTP Routing</i><br/>NodePort Service"]:::nginxStyle
+        
+        CP1 -.-> APP
+        WN1 -.-> APP
+        APP --> ING
+    end
+    
+    GATEWAY["🌐 Traffic Gateway<br/><i>SSH Tunnel / Port Forward</i>"]:::nginxStyle
+    USER["🌐 User Browser<br/><i>External Access</i>"]:::browserStyle
+    
+    %% Observability
+    PROM["📊 Prometheus<br/><i>Metrics Collection</i><br/>Scrape Metrics"]:::prometheusStyle
+    GRAF["📈 Grafana<br/><i>Dashboards & Monitoring</i><br/>Visualize"]:::grafanaStyle
+    
+    %% Main Flow Connections
+    DEV -->|"git push"| GH
+    GH -->|"GitOps Sync"| ARGO
+    ARGO -->|"Kubernetes API"| K8S
+    ING -->|"HTTP Routing"| GATEWAY
+    GATEWAY -->|"Access"| USER
+    
+    %% Observability Connections
+    K8S -.->|"Metrics"| PROM
+    PROM -->|"Visualize"| GRAF
+    
+    %% Styling for subgraphs
+    style K8S fill:#e3f2fd,stroke:#326ce5,stroke-width:4px
+    style CP fill:#fff3e0,stroke:#326ce5,stroke-width:2px
+    style WN fill:#fff3e0,stroke:#326ce5,stroke-width:2px
+```
+
 *Complete architecture showing GitOps workflow, Kubernetes topology, ingress routing, and observability pipeline*
 
 **Key Components Visualized:**
-- GitOps workflow and synchronization
-- Kubernetes cluster topology
-- Ingress routing architecture
-- Observability pipeline flow
+- 👨‍💻 Developer workflow with Git
+- 📦 GitHub as single source of truth
+- 🔄 ArgoCD GitOps automation
+- ☸️ Multi-node Kubernetes cluster
+- 🔀 NGINX Ingress traffic routing
+- 📊 Prometheus & Grafana observability
 
 ---
 
@@ -279,9 +342,9 @@ nebulaops/
 **Saifudheen PV**  
 Aspiring DevOps / AWS / Azure / Red Hat Engineer
 
-- 🔗 [GitHub](https://github.com/Saifudheenpv)
-- 💼 [LinkedIn](https://linkedin.com/in/saifudheenpv07)
-- 📧 [Email](mailto:mesaifudheenpv@gmail.com)
+- 🔗 [GitHub](https://github.com/yourusername)
+- 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
+- 📧 [Email](mailto:your.email@example.com)
 
 ---
 
