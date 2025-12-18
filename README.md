@@ -146,28 +146,39 @@ Reflects real-world lab environments and enterprise network constraints while de
 
 ---
 
-## 📸 Project Evidence
+## 📸 Screenshots
 
-The repository includes screenshots demonstrating:
+### ArgoCD - GitOps Application Management
 
-- ✅ ArgoCD application health and sync status
-- ✅ Grafana dashboards with cluster and pod metrics
-- ✅ Kubernetes nodes and pods status verification
-- ✅ Ingress routing functionality
+![ArgoCD NGINX App](docs/screenshots/argocd-nginx-app.png)
+*ArgoCD dashboard showing NGINX application sync status and health*
 
-These provide verifiable proof of end-to-end platform operation.
+### Kubernetes Cluster Status
+
+![Kubernetes Nodes](docs/screenshots/kubectl-nodes.png)
+*Multi-node Kubernetes cluster with control plane and worker nodes*
+
+![Kubernetes Pods](docs/screenshots/kubectl-pods.png)
+*Running pods across all namespaces including platform services*
+
+### Grafana Monitoring Dashboards
+
+![Grafana Cluster Metrics](docs/screenshots/grafana-cluster.png)
+*Cluster-level resource utilization and performance metrics*
+
+![Grafana Pod Metrics](docs/screenshots/grafana-pods.png)
+*Pod-level CPU, memory, and resource consumption monitoring*
+
+These screenshots provide verifiable proof of end-to-end platform operation.
 
 ---
 
 ## 📊 Architecture Diagram
 
-Full architecture diagram available at:
+![NebulaOps Architecture](architecture/architecture.png)
+*Complete architecture showing GitOps workflow, Kubernetes topology, ingress routing, and observability pipeline*
 
-```
-docs/architecture.png
-```
-
-**Visual Components:**
+**Key Components Visualized:**
 - GitOps workflow and synchronization
 - Kubernetes cluster topology
 - Ingress routing architecture
@@ -213,21 +224,26 @@ Represents a stable, production-style DevOps platform ready for demonstration an
 ```
 nebulaops/
 ├── README.md
+├── ansible.cfg
+├── architecture/
+│   └── architecture.png
 ├── docs/
-│   ├── architecture.png
-│   ├── setup-guide.md
-│   └── troubleshooting.md
-├── ansible/
-│   ├── playbooks/
-│   └── inventory/
-├── k8s/
-│   ├── applications/
-│   ├── ingress/
-│   └── monitoring/
-└── screenshots/
-    ├── argocd/
-    ├── grafana/
-    └── kubectl/
+│   └── screenshots/
+│       ├── argocd-nginx-app.png
+│       ├── grafana-cluster.png
+│       ├── grafana-pods.png
+│       ├── kubectl-nodes.png
+│       └── kubectl-pods.png
+└── ansible/
+    ├── inventory/
+    │   └── hosts.ini
+    ├── playbooks/
+    │   ├── bootstrap.yml
+    │   └── kubernetes.yml
+    └── roles/
+        ├── docker/
+        ├── k8s_install/
+        └── k8s_prereq/
 ```
 
 ---
