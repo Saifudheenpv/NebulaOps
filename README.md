@@ -1,173 +1,290 @@
-🚀 NebulaOps – DevOps & GitOps Platform
-NebulaOps is a self-hosted DevOps and GitOps platform built from scratch to demonstrate real-world Kubernetes platform engineering, automation, GitOps workflows, ingress-based traffic management, and full observability.
-This project goes beyond tutorials and showcases how modern DevOps systems are designed, deployed, operated, and monitored in real environments.
+# 🚀 NebulaOps – DevOps & GitOps Platform
 
-🎯 Project Purpose
-The goal of NebulaOps is to build a production-style Kubernetes platform that demonstrates:
-Infrastructure automation
-GitOps-based application delivery
-Secure and scalable traffic routing
-Cluster and application observability
-Real troubleshooting and operational skills
-This project is designed for learning, showcasing skills, and interview readiness.
+NebulaOps is a self-hosted DevOps and GitOps platform built from scratch to demonstrate real-world Kubernetes platform engineering, automation, GitOps workflows, ingress-based traffic management, and full observability. This project goes beyond tutorials and showcases how modern DevOps systems are designed, deployed, operated, and monitored in production environments.
 
-🏗️ Architecture Overview
-NebulaOps runs on a multi-node Kubernetes cluster:
-servera – Control Plane & Platform Services
-serverb – Worker Node (Application workloads)
-The cluster is built using kubeadm and managed using Ansible, following best practices.
+---
 
-🔁 High-Level Architecture Flow
+## 🎯 Project Purpose
+
+NebulaOps demonstrates production-grade Kubernetes platform engineering through:
+
+- **Infrastructure Automation** – Automated cluster provisioning and configuration
+- **GitOps-Based Delivery** – Declarative, Git-driven application deployments
+- **Secure Traffic Routing** – Ingress-based routing with host-based rules
+- **Full Observability** – Metrics collection, visualization, and monitoring
+- **Operational Excellence** – Real troubleshooting and platform management skills
+
+**Target Audience:** DevOps engineers, platform engineers, and those preparing for technical interviews.
+
+---
+
+## 🏗️ Architecture Overview
+
+### Infrastructure Layout
+
+- **servera** – Control Plane + Platform Services
+- **serverb** – Worker Node (Application Workloads)
+
+Built using **kubeadm** and managed with **Ansible**, following Kubernetes best practices.
+
+### High-Level Architecture Flow
+
+```
 Developer
-   |
-   | git push
-   v
+    ↓ git push
 GitHub (GitOps Repository)
-   |
-   | Continuous Sync
-   v
+    ↓ Continuous Sync
 ArgoCD (GitOps Engine)
-   |
-   | Kubernetes API
-   v
+    ↓ Kubernetes API
 Kubernetes Cluster
-   |
-   |-------------------------------|
-   |                               |
-Application Pods             Platform Services
-(NGINX App)                  (Prometheus, Grafana)
-   |
-   | HTTP Routing
-   v
+    ├── Application Pods (NGINX App)
+    └── Platform Services (Prometheus, Grafana)
+        ↓ HTTP Routing
 NGINX Ingress Controller
-   |
-   | NodePort / SSH Tunnel
-   v
+    ↓ NodePort / SSH Tunnel
 User Browser
+```
 
-🧩 Components Explained
+---
 
-1️⃣ Infrastructure & Automation
-Operating System: Ubuntu 24.04
-Provisioning: Virtual machines
-Configuration Management: Ansible
-Container Runtime: containerd
-Orchestration: Kubernetes (kubeadm)
+## 🧩 Components & Implementation
 
-Ansible is used to prepare the operating system, install Docker/containerd, and configure Kubernetes prerequisites consistently across nodes.
+### 1️⃣ Infrastructure & Automation
 
-2️⃣ Kubernetes Platform
+- **Operating System:** Ubuntu 24.04
+- **Provisioning:** Virtual machines (libvirt/KVM)
+- **Configuration Management:** Ansible playbooks
+- **Container Runtime:** containerd
+- **Orchestration:** Kubernetes (kubeadm)
 
-Multi-node Kubernetes cluster
-Proper node roles (control-plane & worker)
-CNI networking using Flannel
-Secure CRI configuration using systemd cgroups
+Ansible automates OS preparation, container runtime installation, and Kubernetes prerequisites across all nodes, ensuring consistency and repeatability.
 
-This setup reflects how real on-prem or cloud Kubernetes clusters are initialized.
+---
 
-3️⃣ GitOps with ArgoCD (Core Feature)
+### 2️⃣ Kubernetes Platform
 
-GitHub is the single source of truth
-ArgoCD continuously watches the Git repository
-Any change in Git automatically syncs to the cluster
-No manual kubectl apply for applications
+- Multi-node Kubernetes cluster with proper role separation
+- **CNI Plugin:** Flannel for pod networking
+- **CRI Configuration:** systemd cgroups for stability
+- Control plane and worker node architecture
 
-This ensures declarative, auditable, and automated deployments.
+Reflects real-world on-premises and cloud Kubernetes deployments.
 
-4️⃣ Application Delivery
+---
 
-Sample NGINX application deployed via GitOps
-Kubernetes Deployment & Service
-Traffic routed using NGINX Ingress Controller
-Host-based routing implemented
+### 3️⃣ GitOps with ArgoCD (Core Feature)
 
-This demonstrates real-world traffic flow:
+- **Single Source of Truth:** GitHub repository
+- **Continuous Synchronization:** ArgoCD monitors Git for changes
+- **Automated Deployment:** Changes sync automatically to cluster
+- **No Manual Intervention:** Zero `kubectl apply` commands for apps
 
-User → Ingress → Service → Pod
+**Benefits:**
+- Declarative infrastructure
+- Complete audit trail
+- Rollback capability
+- Version control for everything
 
-5️⃣ Observability & Monitoring
+---
 
-Metrics Server for resource metrics
-Prometheus for scraping cluster and pod metrics
-Grafana for visualization
+### 4️⃣ Application Delivery
 
-Dashboards include:
+- **Sample Application:** NGINX web server
+- **Deployment Method:** GitOps via ArgoCD
+- **Resources:** Kubernetes Deployment + Service
+- **Traffic Management:** NGINX Ingress Controller with host-based routing
 
-Node CPU & memory usage
-Pod-level resource usage
-Namespace-level metrics
-Cluster health overview
+**Traffic Flow:**
+```
+User Request → Ingress Controller → Service → Pod
+```
 
-This proves the platform is operable and observable, not just deployable.
+Demonstrates production-ready application delivery patterns.
 
-6️⃣ Secure Access & Networking
+---
 
-Cluster runs on a libvirt NAT network
-External access handled using:
-    SSH tunneling
-    kubectl port-forward
+### 5️⃣ Observability & Monitoring
 
-This reflects real lab and enterprise network constraints and shows practical troubleshooting skills.
+**Metrics Collection:**
+- **Metrics Server** – Resource metrics for pods and nodes
+- **Prometheus** – Time-series metrics scraping and storage
+- **Grafana** – Data visualization and dashboards
 
-🧰 Technology Stack
+**Available Dashboards:**
+- Node CPU and memory utilization
+- Pod-level resource consumption
+- Namespace-level metrics aggregation
+- Cluster health and performance overview
 
-Ansible
-Docker
-containerd
-Kubernetes
-Helm
-ArgoCD
-NGINX Ingress Controller
-Prometheus
-Grafana
-GitHub
+Proves the platform is not just deployable, but fully **operable and observable**.
 
-📸 Project Evidence
+---
 
-Screenshots included in this repository demonstrate:
+### 6️⃣ Secure Access & Networking
 
-    ArgoCD application health & sync
-    Grafana cluster and pod metrics
-    Kubernetes nodes and pods status
+- **Network:** libvirt NAT network for VM isolation
+- **External Access Methods:**
+  - SSH tunneling for secure remote access
+  - `kubectl port-forward` for service exposure
 
-These provide verifiable proof of the platform working end-to-end.
+Reflects real-world lab environments and enterprise network constraints while demonstrating practical troubleshooting skills.
 
-📊 Architecture Diagram
+---
 
-The full architecture diagram is available in:
+## 🧰 Technology Stack
 
+| Category | Technologies |
+|----------|-------------|
+| **Automation** | Ansible |
+| **Containers** | Docker, containerd |
+| **Orchestration** | Kubernetes (kubeadm) |
+| **Package Management** | Helm |
+| **GitOps** | ArgoCD |
+| **Networking** | NGINX Ingress Controller, Flannel CNI |
+| **Monitoring** | Prometheus, Grafana, Metrics Server |
+| **Version Control** | GitHub |
+
+---
+
+## 📸 Project Evidence
+
+The repository includes screenshots demonstrating:
+
+- ✅ ArgoCD application health and sync status
+- ✅ Grafana dashboards with cluster and pod metrics
+- ✅ Kubernetes nodes and pods status verification
+- ✅ Ingress routing functionality
+
+These provide verifiable proof of end-to-end platform operation.
+
+---
+
+## 📊 Architecture Diagram
+
+Full architecture diagram available at:
+
+```
 docs/architecture.png
+```
 
-It visually represents:
+**Visual Components:**
+- GitOps workflow and synchronization
+- Kubernetes cluster topology
+- Ingress routing architecture
+- Observability pipeline flow
 
-    GitOps flow
-    Kubernetes cluster layout
-    Ingress routing
-    Observability pipeline
+---
 
-🧠 What This Project Demonstrates
+## 🧠 Skills Demonstrated
 
-    Real DevOps and platform engineering skills
-    GitOps principles in practice
-    Kubernetes networking and ingress design
-    Monitoring and observability setup
-    Troubleshooting container runtime, ingress, and networking issues
-    Clean documentation and project presentation
+This project showcases expertise in:
 
-🏁 Project Status
+- ✅ **DevOps & Platform Engineering** – Building production-grade infrastructure
+- ✅ **GitOps Principles** – Declarative, Git-driven deployments
+- ✅ **Kubernetes Networking** – Ingress design and traffic management
+- ✅ **Observability** – Metrics collection, monitoring, and visualization
+- ✅ **Troubleshooting** – Container runtime, networking, and ingress issues
+- ✅ **Documentation** – Clear, professional project presentation
+- ✅ **Automation** – Infrastructure as Code with Ansible
 
-NebulaOps v1.0 – Completed ✅
+---
 
-This version represents a stable, production-style DevOps platform.
+## 🏁 Project Status
 
-Future enhancements (optional):
+**NebulaOps v1.0** – ✅ **Completed**
 
-    CI pipelines (GitHub Actions)
-    Helm & Kustomize
-    Private repositories & secrets
-    Cloud deployment (AWS / Azure / GCP)
-    Autoscaling and load testing
+Represents a stable, production-style DevOps platform ready for demonstration and portfolio use.
 
-👤 Author
-Saifudheen PV
-Aspiring DevOps / AWS / Azure / Redhat
+### 🔮 Future Enhancements (Optional)
+
+- [ ] CI pipelines using GitHub Actions
+- [ ] Advanced deployment strategies (Helm, Kustomize)
+- [ ] Private repository integration with secrets management
+- [ ] Cloud deployment (AWS EKS / Azure AKS / GCP GKE)
+- [ ] Horizontal Pod Autoscaling (HPA)
+- [ ] Load testing and performance benchmarking
+- [ ] Service mesh integration (Istio/Linkerd)
+- [ ] Disaster recovery and backup strategies
+
+---
+
+## 📚 Documentation Structure
+
+```
+nebulaops/
+├── README.md
+├── docs/
+│   ├── architecture.png
+│   ├── setup-guide.md
+│   └── troubleshooting.md
+├── ansible/
+│   ├── playbooks/
+│   └── inventory/
+├── k8s/
+│   ├── applications/
+│   ├── ingress/
+│   └── monitoring/
+└── screenshots/
+    ├── argocd/
+    ├── grafana/
+    └── kubectl/
+```
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/nebulaops.git
+   cd nebulaops
+   ```
+
+2. **Review documentation**
+   - Check `docs/setup-guide.md` for detailed setup instructions
+   - Review architecture diagram in `docs/architecture.png`
+
+3. **Deploy infrastructure**
+   ```bash
+   cd ansible
+   ansible-playbook -i inventory/hosts playbooks/cluster-setup.yml
+   ```
+
+4. **Verify deployment**
+   ```bash
+   kubectl get nodes
+   kubectl get pods -A
+   ```
+
+---
+
+## 👤 Author
+
+**Saifudheen PV**  
+Aspiring DevOps / AWS / Azure / Red Hat Engineer
+
+- 🔗 [GitHub](https://github.com/Saifudheenpv)
+- 💼 [LinkedIn](https://linkedin.com/in/saifudheenpv07)
+- 📧 [Email](mailto:mesaifudheenpv@gmail.com)
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+Built with inspiration from real-world DevOps practices and platform engineering patterns used in production environments.
+
+---
+
+## ⭐ Support
+
+If you find this project helpful, please consider giving it a star! It helps others discover this work and motivates further development.
+
+```
+⭐ Star this repository | 🍴 Fork for your own use | 🐛 Report issues
+```
